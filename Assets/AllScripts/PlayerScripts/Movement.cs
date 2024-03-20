@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private AnimationControl _anim;
     [Header("Flags")]
     [SerializeField] public bool CanMove = true;
+    [SerializeField] public bool isJump = false;
 
     [Header("Other")]
     [SerializeField] public Vector3 _moveVector;
@@ -27,6 +28,11 @@ public class Movement : MonoBehaviour
         GetMoveInput();
         if (Input.GetKey(KeyCode.Space) && CanMove && ChControl.isGrounded)
             Jump();
+
+        if (ChControl.isGrounded)
+            isJump = false;
+        else if (!ChControl.isGrounded)
+            isJump = true;
     }
 
     private void FixedUpdate()
