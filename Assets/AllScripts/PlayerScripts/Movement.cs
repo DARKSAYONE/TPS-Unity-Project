@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     [Header("Important Components")]
     [SerializeField] private PlayerStats Stat;
     [SerializeField] private CharacterController ChControl;
+    [SerializeField] private AnimationControl _anim;
     [Header("Flags")]
     [SerializeField] public bool CanMove = true;
 
@@ -37,14 +38,27 @@ public class Movement : MonoBehaviour
     private void GetMoveInput()
     {
         _moveVector = Vector3.zero;
+        _anim.Moving = 0;
         if (Input.GetKey(KeyCode.W) && CanMove)
+        {
             _moveVector += transform.forward;
-        if(Input.GetKey(KeyCode.S) && CanMove)
+            _anim.Moving = 1;
+        }
+        else if (Input.GetKey(KeyCode.S) && CanMove)
+        {
+            _anim.Moving = -1;
             _moveVector -= transform.forward;
-        if (Input.GetKey(KeyCode.D) && CanMove)
+        }
+        else if (Input.GetKey(KeyCode.D) && CanMove)
+        {
             _moveVector += transform.right;
-        if (Input.GetKey(KeyCode.A) && CanMove)
+            _anim.Moving = 2;
+        }
+        else if (Input.GetKey(KeyCode.A) && CanMove)
+        {
             _moveVector -= transform.right;
+            _anim.Moving = 3;
+        }
 
     }
     private void Move()
@@ -72,5 +86,8 @@ public class Movement : MonoBehaviour
         Stat = GetComponent<PlayerStats>();
         if (Stat == null)
             Debug.LogError("Player Stats not found");
+        _anim = GetComponentInChildren<AnimationControl>();
+        if (_anim == null)
+            Debug.LogError("Animation Control not found");
     }
 }
