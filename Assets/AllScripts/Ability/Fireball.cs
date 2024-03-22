@@ -3,12 +3,10 @@ using UnityEngine;
 public class Fireball : MonoBehaviour
 {
     [SerializeField] private float speed = 300.0f;
-    [SerializeField] private Rigidbody rb;
     [SerializeField] private float lifeTime = 10.0f;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         Invoke("DestroyFireball", lifeTime);
     }
 
@@ -33,7 +31,9 @@ public class Fireball : MonoBehaviour
         {
             Debug.Log("Hit the mob");
             DestroyFireball();
-        }*/   
+        }*/
+        Debug.Log("CollisionEnter");   
+        
         DestroyFireball();
     }
 

@@ -25,6 +25,8 @@ public class AnimationControl : MonoBehaviour
     void Update()
     {
         AnimatorControl();
+
+        
     }
 
     public void AnimatorControl()

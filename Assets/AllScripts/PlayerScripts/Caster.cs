@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -36,9 +37,9 @@ public class Caster : MonoBehaviour
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
+        {
             CastFSkill();
-        
-
+        }
         if(FSkillisCasting)
             FSkillAnimCastCheck();
        
@@ -49,24 +50,35 @@ public class Caster : MonoBehaviour
     void FSkillAnimCastCheck()
     {
         AnimatorStateInfo animInfo = _AnimControl._Animator.GetCurrentAnimatorStateInfo(0);
-        if (animInfo.normalizedTime >= 1.0f)
-        {
-            FSkillisCasting = false;
-            _Movement.CanMove = true;
-            isCasting = false;
-            UseFSkill();
-        }
+        
+        
+            _AnimControl._Animator.Play("Cast");
+            if (animInfo.normalizedTime >= 1.0f)
+            {
+                FSkillisCasting = false;
+                _Movement.CanMove = true;
+                isCasting = false;
+                UseFSkill();
+            }
+        
+        
     }
     void CastFSkill()
     {
-        
+        AnimatorStateInfo animInfo = _AnimControl._Animator.GetCurrentAnimatorStateInfo(0);
+
         if (!FSkillonCooldown && Stats.Mana >= FSkillManaCost && !FSkillisCasting && !isCasting)
         {
-            isCasting = true;
-            FSkillisCasting = true;
-            _Movement.CanMove = false;
-            Stats.Mana -= FSkillManaCost;
-           
+            if (_AnimControl._Animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != "SpellCast")
+            {
+                
+                isCasting = true;
+                FSkillisCasting = true;
+                _Movement.CanMove = false;
+                Stats.Mana -= FSkillManaCost;
+                Debug.Log(_AnimControl._Animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+            }
+            
         }
         else if(FSkillonCooldown)
         {

@@ -4422,7 +4422,7 @@ MonoBehaviour:
   ModJumpForce: 1
   Health: 1
   MaxHealth: 100
-  MaxMana: 200
+  MaxMana: 1000
   Mana: 0
   ManaRegen: 0.3
   Level: 1
