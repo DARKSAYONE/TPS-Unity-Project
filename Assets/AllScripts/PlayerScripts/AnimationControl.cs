@@ -6,6 +6,7 @@ public class AnimationControl : MonoBehaviour
 {
     [SerializeField] public Animator _Animator;
     [SerializeField] public Movement _Movement;
+    [SerializeField] public Caster _Caster;
     [SerializeField] public int Moving = 0;
     
     void Start()
@@ -16,6 +17,9 @@ public class AnimationControl : MonoBehaviour
         _Movement = GetComponentInParent<Movement>();
         if (_Movement == null)
             Debug.LogError("Movement Component not found");
+        _Caster = GetComponentInParent<Caster>();
+        if (_Caster == null)
+            Debug.LogError("Caster Component not found");
     }
 
     void Update()
@@ -26,5 +30,7 @@ public class AnimationControl : MonoBehaviour
     public void AnimatorControl()
     {
         _Animator.SetInteger("Run", Moving);
+        _Animator.SetBool("Cast", _Caster.isCasting);
+        
     }
 }

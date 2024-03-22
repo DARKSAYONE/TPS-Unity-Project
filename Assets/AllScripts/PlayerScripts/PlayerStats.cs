@@ -14,6 +14,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float MaxHealth;
     [SerializeField] public float MaxMana;
     [SerializeField] public float Mana;
+    [SerializeField] public float ManaRegen = 0.001f;
     [SerializeField] public int Level;
     [SerializeField] public int EXP;
     [SerializeField] public int EXPForLevel;
@@ -32,11 +33,20 @@ public class PlayerStats : MonoBehaviour
     void FixedUpdate()
     {
         ApplyMod();
+        ManaHeal();
     }
 
     public void ApplyMod()
     {
         MaxHealth = MaxHealth * ModMaxHealth;
         MoveSpeed = MoveSpeed * ModMoveSpeed;
+    }
+
+    public void ManaHeal()
+    {
+        if(Mana < MaxMana)
+        {
+            Mana = Mana + ManaRegen;
+        }
     }
 }
