@@ -25,8 +25,6 @@ public class AnimationControl : MonoBehaviour
     void Update()
     {
         AnimatorControl();
-
-        
     }
 
     public void AnimatorControl()
@@ -34,5 +32,10 @@ public class AnimationControl : MonoBehaviour
         _Animator.SetInteger("Run", Moving);
         _Animator.SetBool("Cast", _Caster.isCasting);
         
+    }
+
+    public void OnFSkillAnimEnd()
+    {
+        _Caster.UseFSkill();
     }
 }

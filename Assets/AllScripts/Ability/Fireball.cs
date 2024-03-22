@@ -27,11 +27,11 @@ public class Fireball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        /*if(collision.gameObject.CompareTag("Mob"))
+        if(collision.gameObject.CompareTag("Mob"))
         {
             Debug.Log("Hit the mob");
             DestroyFireball();
-        }*/
+        }
         Debug.Log("CollisionEnter");   
         
         DestroyFireball();

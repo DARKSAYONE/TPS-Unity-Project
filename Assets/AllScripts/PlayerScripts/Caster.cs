@@ -45,20 +45,32 @@ public class Caster : MonoBehaviour
        
     }
 
+    Vector3 GetTargetPoint()
+    {
+        //ray to center of the screen
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.7f, 0));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            return hit.point;
+        }
+        return ray.GetPoint(100);
+    }
+
     //------------------------------------------------<FIRST SKILL LOGIC>----------------------------------------------------------------------------
-    
+
     void FSkillAnimCastCheck()
     {
         AnimatorStateInfo animInfo = _AnimControl._Animator.GetCurrentAnimatorStateInfo(0);
         
         
-            _AnimControl._Animator.Play("Cast");
-            if (animInfo.normalizedTime >= 1.0f)
+            
+            if (animInfo.normalizedTime >= 0.6f)
             {
                 FSkillisCasting = false;
                 _Movement.CanMove = true;
                 isCasting = false;
-                UseFSkill();
+                //UseFSkill();
             }
         
         
@@ -71,10 +83,10 @@ public class Caster : MonoBehaviour
         {
             if (_AnimControl._Animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != "SpellCast")
             {
-                
-                isCasting = true;
+                _AnimControl._Animator.Play("Cast", 0, 0);
                 FSkillisCasting = true;
                 _Movement.CanMove = false;
+                isCasting = true;
                 Stats.Mana -= FSkillManaCost;
                 Debug.Log(_AnimControl._Animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
             }
@@ -91,10 +103,12 @@ public class Caster : MonoBehaviour
         }
         
     }
-    void UseFSkill()
+    public void UseFSkill()
     {
         Debug.Log("CAST");
-        Instantiate(FSkill, SourcePoint.position, transform.rotation);
+        var _FSkill = Instantiate(FSkill, SourcePoint.position, transform.rotation);
+        _FSkill.transform.LookAt(GetTargetPoint());
+        
     }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
 }
