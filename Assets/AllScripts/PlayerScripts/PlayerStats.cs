@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int ModMaxHealth = 1;
     [SerializeField] public int ModMoveSpeed = 1;
     [SerializeField] public float ModJumpForce = 1;
+    [SerializeField] public float ModPowerForce = 1;
     [Header("Main Stats")]
     [SerializeField] public float Health;
     [SerializeField] public float MaxHealth;
@@ -20,6 +21,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int EXPForLevel;
     [SerializeField] public float MoveSpeed;
     [SerializeField] public float JumpForce;
+    [SerializeField] public float PowerForce;
     [SerializeField] public bool isAlive = true;
     
 

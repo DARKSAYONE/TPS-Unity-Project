@@ -23,9 +23,21 @@ public class MobStatLogical : MonoBehaviour
         MaxHealth = MaxHealth * ModMaxHealth;
         MoveSpeed = MoveSpeed * ModMoveSpeed;
     }
-    // Update is called once per frame
+    
+
+
+    public void TakeDamage(float damage)
+    {
+        Health -= damage;
+        if(Health <= 0)
+        {
+            isAlive = false;
+        }
+    }
+
     void Update()
     {
+        
         ApplyMod();
     }
 }

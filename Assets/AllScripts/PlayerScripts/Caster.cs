@@ -65,12 +65,14 @@ public class Caster : MonoBehaviour
         
         
             
-            if (animInfo.normalizedTime >= 0.6f)
+            if (animInfo.normalizedTime >= 0.6213f)
             {
                 FSkillisCasting = false;
                 _Movement.CanMove = true;
                 isCasting = false;
-                //UseFSkill();
+                UseFSkill();
+                FSkillonCooldown = true;
+                StartCoroutine(FSkillCooldownTimer());
             }
         
         
@@ -109,6 +111,12 @@ public class Caster : MonoBehaviour
         var _FSkill = Instantiate(FSkill, SourcePoint.position, transform.rotation);
         _FSkill.transform.LookAt(GetTargetPoint());
         
+    }
+
+    public IEnumerator FSkillCooldownTimer()
+    {
+        yield return new WaitForSeconds(FSkillCooldownTime);
+        FSkillonCooldown = false;
     }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
 }

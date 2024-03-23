@@ -4,10 +4,18 @@ public class Fireball : MonoBehaviour
 {
     [SerializeField] private float speed = 300.0f;
     [SerializeField] private float lifeTime = 10.0f;
+    [SerializeField] public float FireballBaseDamage = 30.0f;
+    [SerializeField] public GameObject Player;
+    [SerializeField] public PlayerStats _PlayerStats;
+    [SerializeField] public float modDamage;
 
     private void Start()
     {
+        Player = GameObject.FindWithTag("Player");
+        _PlayerStats = Player.GetComponent<PlayerStats>();
         Invoke("DestroyFireball", lifeTime);
+        modDamage = _PlayerStats.ModPowerForce;
+
     }
 
     private void Update()
@@ -29,7 +37,12 @@ public class Fireball : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Mob"))
         {
-            Debug.Log("Hit the mob");
+            MobStatLogical mob = collision.gameObject.GetComponent<MobStatLogical>();
+            if(mob.isAlive)
+            {
+                mob.TakeDamage(FireballBaseDamage * modDamage);
+                Debug.Log("Mob hitted on "+ FireballBaseDamage * modDamage + " damage");
+            }
             DestroyFireball();
         }
         Debug.Log("CollisionEnter");   
