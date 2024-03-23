@@ -19,6 +19,14 @@ public class Caster : MonoBehaviour
     [SerializeField] public bool FSkillonCooldown = false;
     [SerializeField] public bool FSkillisCasting = false;
     [SerializeField] public bool FSkillAnimCompele = false;
+    [Header("Q Skill")]
+    [SerializeField] public bool PlayerGetQSkill = true;
+    [SerializeField] public GameObject QSkill;
+    [SerializeField] public float QSkillManaCost;
+    [SerializeField] public float QSkillCooldownTime;
+    [SerializeField] public bool QSkillOnCooldown = false;
+    [SerializeField] public bool QSkillisCasting = false;
+    [SerializeField] public bool QSkillAnimComplete = false;
 
 
     void Start()
@@ -42,6 +50,12 @@ public class Caster : MonoBehaviour
         }
         if(FSkillisCasting)
             FSkillAnimCastCheck();
+        if(Input.GetKey(KeyCode.Q) && PlayerGetQSkill)
+        {
+            CastQSkill();
+        }
+        if (QSkillisCasting)
+            QSkillAnimCastCheck();
        
     }
 
@@ -108,9 +122,8 @@ public class Caster : MonoBehaviour
     public void UseFSkill()
     {
         Debug.Log("CAST");
-        var _FSkill = Instantiate(FSkill, SourcePoint.position, transform.rotation);
+        var _FSkill = Instantiate(FSkill, SourcePoint.position, SourcePoint.rotation);
         _FSkill.transform.LookAt(GetTargetPoint());
-        
     }
 
     public IEnumerator FSkillCooldownTimer()
@@ -119,4 +132,57 @@ public class Caster : MonoBehaviour
         FSkillonCooldown = false;
     }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //------------------------------------------------<Q SKILL LOGIC>----------------------------------------------------------------------------
+
+    void QSkillAnimCastCheck()
+    {
+        AnimatorStateInfo animInfo = _AnimControl._Animator.GetCurrentAnimatorStateInfo(0);
+        if(animInfo.normalizedTime >= 0.4f)
+        {
+            QSkillisCasting = false;
+            _Movement.CanMove = true;
+            isCasting = false;
+            UseQSkill();
+            QSkillOnCooldown = true;
+            StartCoroutine(QSKillCooldownTimer());
+        }
+    }
+    void CastQSkill()
+    {
+        AnimatorStateInfo animInfo = _AnimControl._Animator.GetCurrentAnimatorStateInfo(0);
+        if(!QSkillOnCooldown && Stats.Mana >= QSkillManaCost && !QSkillisCasting && !isCasting)
+        {
+            if (_AnimControl._Animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != "GrenadeCast")
+            {
+                _AnimControl._Animator.Play("GrenadeCast", 0, 0);
+                QSkillisCasting=true;
+                _Movement.CanMove = false;
+                isCasting = true;
+                Stats.Mana -= QSkillManaCost;
+            }
+        }
+        else if(QSkillOnCooldown)
+        {
+            Debug.Log("Spell on KD");
+        }
+        else if(!QSkillOnCooldown && Stats.Mana < QSkillManaCost)
+        {
+            Debug.Log("No mana");
+        }
+    }
+    public void UseQSkill()
+    {
+        Debug.Log("QCAST");
+        var _QSkill = Instantiate(QSkill, SourcePoint.position, SourcePoint.rotation);
+        _QSkill.transform.LookAt(GetTargetPoint());
+        _QSkill.GetComponent<Rigidbody>().AddForce(SourcePoint.forward * 500);
+
+    }
+    public IEnumerator QSKillCooldownTimer()
+    {
+        yield return new WaitForSeconds(QSkillCooldownTime);
+        QSkillOnCooldown = false;
+    }
+
 }

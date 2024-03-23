@@ -14,6 +14,8 @@ public class UIDrawScript : MonoBehaviour
     [SerializeField] public RectTransform ManavalueRect;
     [Header("SkillsPanel")]
     [SerializeField] GameObject FSkillOnCooldownUI;
+    [SerializeField] GameObject QSkillPanel;
+    [SerializeField] GameObject QSkillOnCoolDownUI;
 
 
     void Start()
@@ -31,6 +33,7 @@ public class UIDrawScript : MonoBehaviour
     {
         DrawUI();
         FSkillOnCooldown(PCaster.FSkillonCooldown);
+        QSkillUI(PCaster.PlayerGetQSkill);
     }
 
     void DrawUI()
@@ -44,14 +47,12 @@ public class UIDrawScript : MonoBehaviour
 
     public void FSkillOnCooldown(bool onCD)
     {
-        if (onCD)
-        {
-            FSkillOnCooldownUI.SetActive(onCD);
-        }
-        else
-        {
-            FSkillOnCooldownUI.SetActive(onCD);
-        }
+        FSkillOnCooldownUI.SetActive(onCD);
+    }
 
+    public void QSkillUI(bool State)
+    {
+        QSkillPanel.SetActive(State);
+        QSkillOnCoolDownUI.SetActive(PCaster.QSkillOnCooldown);
     }
 }

@@ -30,7 +30,8 @@ public class AnimationControl : MonoBehaviour
     public void AnimatorControl()
     {
         _Animator.SetInteger("Run", Moving);
-        _Animator.SetBool("Cast", _Caster.isCasting);
+        _Animator.SetBool("Cast", _Caster.FSkillisCasting);
+        _Animator.SetBool("QSkillCast", _Caster.QSkillisCasting);
         
     }
 

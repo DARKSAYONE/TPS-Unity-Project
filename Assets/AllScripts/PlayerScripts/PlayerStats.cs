@@ -30,6 +30,10 @@ public class PlayerStats : MonoBehaviour
         Health = MaxHealth;
         Mana = MaxMana;
     }
+    public void TakeDamage(float damage)
+    {
+        Health -= damage;
+    }
 
    
     void FixedUpdate()
