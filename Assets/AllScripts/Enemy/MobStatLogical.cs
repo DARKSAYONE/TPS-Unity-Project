@@ -5,8 +5,8 @@ using UnityEngine;
 public class MobStatLogical : MonoBehaviour
 {
     [Header("Mod")]
-    [SerializeField] public int ModMaxHealth = 1;
-    [SerializeField] public int ModMoveSpeed = 1;
+    [SerializeField] public float ModMaxHealth = 1;
+    [SerializeField] public float ModMoveSpeed = 1;
     [Header("Main Stats")]
     [SerializeField] public float Health;
     [SerializeField] public float MaxHealth;
@@ -15,6 +15,7 @@ public class MobStatLogical : MonoBehaviour
     void Start()
     {
         Health = MaxHealth;
+        ApplyMod();
     }
 
 
@@ -35,9 +36,13 @@ public class MobStatLogical : MonoBehaviour
         }
     }
 
+    public void Death()
+    {
+
+    }
     void Update()
     {
         
-        ApplyMod();
+      
     }
 }
