@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -17,8 +18,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float Mana;
     [SerializeField] public float ManaRegen = 0.001f;
     [SerializeField] public int Level;
-    [SerializeField] public int EXP;
-    [SerializeField] public int EXPForLevel;
+    [SerializeField] public float EXP;
+    [SerializeField] public float EXPForLevel;
+    [SerializeField] public int BuyPoints = 0;
     [SerializeField] public float MoveSpeed;
     [SerializeField] public float JumpForce;
     [SerializeField] public float PowerForce;
@@ -40,6 +42,9 @@ public class PlayerStats : MonoBehaviour
     {
         ApplyMod();
         ManaHeal();
+        LevelUP();
+        if(Health <= 0)
+            isAlive = false;
     }
 
     public void ApplyMod()
@@ -54,5 +59,20 @@ public class PlayerStats : MonoBehaviour
         {
             Mana = Mana + ManaRegen;
         }
+    }
+
+    public void LevelUP()
+    {
+        if(EXP >= EXPForLevel)
+        {
+            Level++;
+            EXP = 0;
+            PowerForce = PowerForce + (0.1f);
+        }
+    }
+
+    public void GetEXP(float _EXP)
+    {
+        EXP = _EXP + EXP;
     }
 }

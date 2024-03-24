@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MobStatLogical : MonoBehaviour
 {
+    [Header("Core")]
+    [SerializeField] public EnemyLogic EAI;
     [Header("Mod")]
     [SerializeField] public float ModMaxHealth = 1;
     [SerializeField] public float ModMoveSpeed = 1;
@@ -12,10 +14,12 @@ public class MobStatLogical : MonoBehaviour
     [SerializeField] public float MaxHealth;
     [SerializeField] public float MoveSpeed;
     [SerializeField] public bool isAlive = true;
+    [SerializeField] public bool GetEXP = false;
     void Start()
     {
-        Health = MaxHealth;
         ApplyMod();
+        Health = MaxHealth;
+        EAI = GetComponent<EnemyLogic>();
     }
 
 
@@ -38,7 +42,14 @@ public class MobStatLogical : MonoBehaviour
 
     public void Death()
     {
-
+        PlayerStats Player = EAI.Player.GetComponent<PlayerStats>();
+        if (!GetEXP)
+        {
+            Player.GetEXP(50);
+            GetEXP = true;
+        }
+        EAI._Agent.isStopped = true;
+        EAI._Animator._Anim.SetBool("Death", true);
     }
     void Update()
     {

@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class AIAnimator : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] public Animator _Anim;
+    [SerializeField] public MobStatLogical Stat;
     void Start()
     {
-        
+        _Anim = GetComponent<Animator>();
+        Stat = GetComponentInParent<MobStatLogical>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CheckAnimStat(bool State)
     {
-        
+        _Anim.SetBool("Run", State);
+    }
+    void FixedUpdate()
+    {
+ 
     }
 }

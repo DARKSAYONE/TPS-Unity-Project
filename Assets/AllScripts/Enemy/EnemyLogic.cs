@@ -9,6 +9,7 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField] public NavMeshAgent _Agent;
     [SerializeField] public MobStatLogical Stat;
     [SerializeField] public GameObject Player;
+    [SerializeField] public AIAnimator _Animator;
     [Header("For Logic")]
     [SerializeField] public float _DistanceToPlayer;
     [SerializeField] public float AttackRange = 10f;
@@ -21,6 +22,9 @@ public class EnemyLogic : MonoBehaviour
         if (Stat == null)
             Debug.Log("MobStat not found");
         Player = GameObject.FindWithTag("Player");
+        _Animator = GetComponentInChildren<AIAnimator>();
+        if (_Animator == null)
+            Debug.LogError("AIAnimator not found");
     }
 
     void FixedUpdate()
@@ -41,10 +45,12 @@ public class EnemyLogic : MonoBehaviour
         if(Distance > AttackRange)
         {
             GoToPlayer();
+            _Animator.CheckAnimStat(true);
         }
         else if(Distance < AttackRange)
         {
             AttackPlayer();
+            _Animator.CheckAnimStat(false);
         }
     }
 
@@ -58,4 +64,6 @@ public class EnemyLogic : MonoBehaviour
     {
         _Agent.isStopped = true;
     }
+
+    
 }

@@ -12,6 +12,9 @@ public class UIDrawScript : MonoBehaviour
     [SerializeField] public TextMeshProUGUI ManaText;
     [SerializeField] public RectTransform HealthvalueRect;
     [SerializeField] public RectTransform ManavalueRect;
+    [SerializeField] public TextMeshProUGUI EXPText;
+    [SerializeField] public RectTransform EXPValueRect;
+    [SerializeField] public TextMeshProUGUI LevelText;
     [Header("SkillsPanel")]
     [SerializeField] GameObject FSkillOnCooldownUI;
     [SerializeField] GameObject QSkillPanel;
@@ -42,6 +45,9 @@ public class UIDrawScript : MonoBehaviour
         HealthvalueRect.anchorMax = new Vector2(Stat.Health / Stat.MaxHealth, 1);
         ManaText.SetText(Stat.Mana.ToString()+"/"+Stat.MaxMana);
         ManavalueRect.anchorMax = new Vector2(Stat.Mana/ Stat.MaxMana, 1);
+        EXPText.SetText(Stat.EXP.ToString() + "/" + Stat.EXPForLevel);
+        EXPValueRect.anchorMax = new Vector2(Stat.EXP / Stat.EXPForLevel, 1);
+        LevelText.SetText(Stat.Level.ToString());
         
     }
 

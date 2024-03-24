@@ -20,7 +20,7 @@ public class Fireball : MonoBehaviour
 
     private void Update()
     {
-        
+        modDamage = _PlayerStats.PowerForce;
     }
 
     private void FixedUpdate()
@@ -38,7 +38,8 @@ public class Fireball : MonoBehaviour
         if(collision.gameObject.CompareTag("Mob"))
         {
             MobStatLogical mob = collision.gameObject.GetComponent<MobStatLogical>();
-            if(mob.isAlive)
+            float Power = GameObject.FindWithTag("Player").GetComponent<PlayerStats>().PowerForce;
+            if (mob.isAlive)
             {
                 mob.TakeDamage(FireballBaseDamage * modDamage);
                 Debug.Log("Mob hitted on "+ FireballBaseDamage * modDamage + " damage");
