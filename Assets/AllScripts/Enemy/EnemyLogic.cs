@@ -18,6 +18,7 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField] public bool Casting = false;
     [SerializeField] public bool CastingIsStarted = false;
     [SerializeField] public float TimeToCast = 5.0f;
+    [SerializeField] private float turnSpeed = 500f;
     void Start()
     {
         _Agent = GetComponent<NavMeshAgent>();
@@ -43,6 +44,8 @@ public class EnemyLogic : MonoBehaviour
         {
             Stat.Death();
         }
+
+        TurnToPlayer();
     }
 
     void CheckRange(float Distance)
@@ -76,8 +79,16 @@ public class EnemyLogic : MonoBehaviour
         CastingIsStarted = false;
         _Agent.isStopped = false;
         _Animator.Casting(false);
+    }
 
-
+    void TurnToPlayer()
+    {
+        if (CastingIsStarted == true)
+        {
+            Vector3 direction = (Player.transform.position - transform.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+        }
     }
 
     void UseSkill()
@@ -85,15 +96,9 @@ public class EnemyLogic : MonoBehaviour
 
         Debug.Log("FIRE");
         var Skill = Instantiate(Spell, _SourcePoint.position, _SourcePoint.rotation);
-
-        // Определяем направление к игроку
         Vector3 direction = (Player.transform.position - _SourcePoint.position).normalized;
-
-        // Добавляем некоторое смещение к направлению (например, вверх по Y оси)
-        float yOffset = 0.1f; // Настройте значение смещения по вашему усмотрению
+        float yOffset = 0.1f;
         direction += Vector3.up * yOffset;
-
-        // Устанавливаем направление объекта Fireball
         Skill.transform.rotation = Quaternion.LookRotation(direction);
     }
 

@@ -115,7 +115,6 @@ public class Movement : MonoBehaviour
             if(!timerStart)
             {
                 StartCoroutine(DeathState());
-                
             }
             
         }

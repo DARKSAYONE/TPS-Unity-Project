@@ -1041,6 +1041,10 @@ MonoBehaviour:
   Spell: {fileID: 3959470686299066232, guid: 481efde2b115c4f4080e135d77dcf1d8, type: 3}
   _DistanceToPlayer: 0
   AttackRange: 10
+  Casting: 0
+  CastingIsStarted: 0
+  TimeToCast: 5
+  turnSpeed: 500
 --- !u!195 &3353489926565469898
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2053,7 +2057,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5794996204629789204}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
