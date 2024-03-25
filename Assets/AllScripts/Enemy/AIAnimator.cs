@@ -16,6 +16,11 @@ public class AIAnimator : MonoBehaviour
     {
         _Anim.SetBool("Run", State);
     }
+
+    public void Casting(bool State)
+    {
+        _Anim.SetBool("Casting", State);
+    }
     void FixedUpdate()
     {
  

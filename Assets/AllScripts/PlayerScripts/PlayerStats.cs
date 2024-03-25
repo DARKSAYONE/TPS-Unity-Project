@@ -7,7 +7,7 @@ public class PlayerStats : MonoBehaviour
 {
 
     [Header("Mod")]
-    [SerializeField] public int ModMaxHealth = 1;
+    [SerializeField] public float ModMaxHealth = 1;
     [SerializeField] public int ModMoveSpeed = 1;
     [SerializeField] public float ModJumpForce = 1;
     [SerializeField] public float ModPowerForce = 1;
@@ -40,7 +40,6 @@ public class PlayerStats : MonoBehaviour
    
     void FixedUpdate()
     {
-        ApplyMod();
         ManaHeal();
         LevelUP();
         if(Health <= 0)
@@ -65,9 +64,11 @@ public class PlayerStats : MonoBehaviour
     {
         if(EXP >= EXPForLevel)
         {
+            ApplyMod();
             Level++;
             EXP = 0;
             PowerForce = PowerForce + (0.1f);
+            ModMaxHealth = ModMaxHealth + (0.2f);
         }
     }
 

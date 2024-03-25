@@ -10,9 +10,14 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField] public MobStatLogical Stat;
     [SerializeField] public GameObject Player;
     [SerializeField] public AIAnimator _Animator;
+    [SerializeField] public Transform _SourcePoint;
+    [SerializeField] public GameObject Spell;
     [Header("For Logic")]
     [SerializeField] public float _DistanceToPlayer;
     [SerializeField] public float AttackRange = 10f;
+    [SerializeField] public bool Casting = false;
+    [SerializeField] public bool CastingIsStarted = false;
+    [SerializeField] public float TimeToCast = 5.0f;
     void Start()
     {
         _Agent = GetComponent<NavMeshAgent>();
@@ -27,7 +32,7 @@ public class EnemyLogic : MonoBehaviour
             Debug.LogError("AIAnimator not found");
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if(Stat.isAlive)
         {
@@ -47,22 +52,49 @@ public class EnemyLogic : MonoBehaviour
             GoToPlayer();
             _Animator.CheckAnimStat(true);
         }
-        else if(Distance < AttackRange)
+        else if(Distance < AttackRange && !CastingIsStarted)
         {
-            AttackPlayer();
+            _Agent.isStopped = true;
+            StartCoroutine(StartCast());
             _Animator.CheckAnimStat(false);
         }
     }
 
     void GoToPlayer()
     {
-        _Agent.isStopped = false;
         _Agent.SetDestination(Player.transform.position);
     }
     
-    void AttackPlayer()
+    public IEnumerator StartCast()
     {
-        _Agent.isStopped = true;
+        Debug.Log("Couruntine started");
+        CastingIsStarted = true;
+        _Animator.Casting(true);
+        yield return new WaitForSeconds(TimeToCast);
+        Debug.Log("Couruntine over");
+        UseSkill();
+        CastingIsStarted = false;
+        _Agent.isStopped = false;
+        _Animator.Casting(false);
+
+
+    }
+
+    void UseSkill()
+    {
+
+        Debug.Log("FIRE");
+        var Skill = Instantiate(Spell, _SourcePoint.position, _SourcePoint.rotation);
+
+        // Определяем направление к игроку
+        Vector3 direction = (Player.transform.position - _SourcePoint.position).normalized;
+
+        // Добавляем некоторое смещение к направлению (например, вверх по Y оси)
+        float yOffset = 0.1f; // Настройте значение смещения по вашему усмотрению
+        direction += Vector3.up * yOffset;
+
+        // Устанавливаем направление объекта Fireball
+        Skill.transform.rotation = Quaternion.LookRotation(direction);
     }
 
     
