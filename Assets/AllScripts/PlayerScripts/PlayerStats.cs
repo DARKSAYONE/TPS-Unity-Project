@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -42,8 +43,9 @@ public class PlayerStats : MonoBehaviour
     {
         ManaHeal();
         LevelUP();
-        if(Health <= 0)
+        if (Health <= 0)
             isAlive = false;
+                
     }
 
     public void ApplyMod()
@@ -75,5 +77,12 @@ public class PlayerStats : MonoBehaviour
     public void GetEXP(float _EXP)
     {
         EXP = _EXP + EXP;
+    }
+
+    public void ReloadScene()
+    {
+        int activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(activeSceneIndex);
+        Time.timeScale = 1.0f;
     }
 }

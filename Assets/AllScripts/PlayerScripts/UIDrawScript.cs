@@ -19,6 +19,13 @@ public class UIDrawScript : MonoBehaviour
     [SerializeField] GameObject FSkillOnCooldownUI;
     [SerializeField] GameObject QSkillPanel;
     [SerializeField] GameObject QSkillOnCoolDownUI;
+    [Header("GameOverUI")]
+    [SerializeField] public GameObject GameOverUI;
+    [Header("All UI objects")]
+    [SerializeField] public GameObject SkillPanel;
+    [SerializeField] public GameObject StatsPanel;
+    [SerializeField] public GameObject FSkillPanel;
+
 
 
     void Start()
@@ -60,5 +67,13 @@ public class UIDrawScript : MonoBehaviour
     {
         QSkillPanel.SetActive(State);
         QSkillOnCoolDownUI.SetActive(PCaster.QSkillOnCooldown);
+    }
+
+    public void TurnOfAllPlayUI()
+    {
+        SkillPanel.SetActive(false);
+        StatsPanel.SetActive(false);
+        FSkillPanel.SetActive(false);
+        QSkillPanel.SetActive(false);
     }
 }

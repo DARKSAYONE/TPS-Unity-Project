@@ -44,19 +44,22 @@ public class Caster : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Stats.isAlive)
         {
-            CastFSkill();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                CastFSkill();
+            }
+            if (FSkillisCasting)
+                FSkillAnimCastCheck();
+            if (Input.GetKey(KeyCode.Q) && PlayerGetQSkill)
+            {
+                CastQSkill();
+            }
+            if (QSkillisCasting)
+                QSkillAnimCastCheck();
         }
-        if(FSkillisCasting)
-            FSkillAnimCastCheck();
-        if(Input.GetKey(KeyCode.Q) && PlayerGetQSkill)
-        {
-            CastQSkill();
-        }
-        if (QSkillisCasting)
-            QSkillAnimCastCheck();
-       
     }
 
     Vector3 GetTargetPoint()

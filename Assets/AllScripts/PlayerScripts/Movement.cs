@@ -8,12 +8,14 @@ public class Movement : MonoBehaviour
     [SerializeField] private PlayerStats Stat;
     [SerializeField] private CharacterController ChControl;
     [SerializeField] private AnimationControl _anim;
+    [SerializeField] public UIDrawScript UI;
     [Header("Flags")]
     [SerializeField] public bool CanMove = true;
     [SerializeField] public bool isJump = false;
 
     [Header("Other")]
     [SerializeField] public Vector3 _moveVector;
+    private bool timerStart = false;
     
     private float _fallVelocity = 0f;
     private float _gravity = 9.8f;
@@ -25,6 +27,8 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        Death();
+
         GetMoveInput();
         if (Input.GetKey(KeyCode.Space) && CanMove && ChControl.isGrounded)
             Jump();
@@ -95,5 +99,34 @@ public class Movement : MonoBehaviour
         _anim = GetComponentInChildren<AnimationControl>();
         if (_anim == null)
             Debug.LogError("Animation Control not found");
+        UI = GetComponentInChildren<UIDrawScript>();
+        if (UI == null)
+            Debug.LogError("UI Script not found");
+    }
+
+    public void Death()
+    {
+        if (Stat.isAlive == false)
+        {
+            _anim._Animator.SetBool("Death", true);
+            CanMove = false;
+            UI.GameOverUI.SetActive(true);
+            UI.TurnOfAllPlayUI();
+            if(!timerStart)
+            {
+                StartCoroutine(DeathState());
+                
+            }
+            
+        }
+    }
+
+    public IEnumerator DeathState()
+    {
+        GetComponent<AudioSource>().Play();
+        timerStart = true;
+        yield return new WaitForSeconds(3.0f);
+        Time.timeScale = 0.0f;
+        Cursor.visible = true;
     }
 }
