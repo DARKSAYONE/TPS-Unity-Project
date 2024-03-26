@@ -29,6 +29,15 @@ public class Caster : MonoBehaviour
     [SerializeField] public bool QSkillisCasting = false;
     [SerializeField] public bool QSkillAnimComplete = false;
     [SerializeField] public float QSkillTimeToCast = 3.0f;
+    [Header("E Skill")]
+    [SerializeField] public bool PlayerGetESkill = true;
+    [SerializeField] public GameObject ESkill;
+    [SerializeField] public float ESkillManaCost;
+    [SerializeField] public float ESkillCooldownTime;
+    [SerializeField] public bool ESkillOnCooldown = false;
+    [SerializeField] public bool ESkillisCasting = false;
+    [SerializeField] public bool ESkillAnimComplete = false;
+    [SerializeField] public float ESkillTimeToCast = 5.0f;
 
 
     void Start()
@@ -57,6 +66,10 @@ public class Caster : MonoBehaviour
             if (Input.GetKey(KeyCode.Q) && PlayerGetQSkill)
             {
                 CastQSkill();
+            }
+            if(Input.GetKey(KeyCode.E) && PlayerGetESkill)
+            {
+                CastESkill();
             }
             
         }
@@ -124,6 +137,7 @@ public class Caster : MonoBehaviour
         UseFSkill();
         FSkillisCasting = false;
         _Movement.CanMove = true;
+        FSkillonCooldown = true;
         isCasting = false;
         StartCoroutine(FSkillCooldownTimer());
     }
@@ -203,4 +217,21 @@ public class Caster : MonoBehaviour
         QSkillOnCooldown = false;
     }
 
+    //------------------------------------------------<E SKILL LOGIC>----------------------------------------------------------------------------
+
+    void CastESkill()
+    {
+        if (!ESkillOnCooldown && Stats.Mana >= ESkillManaCost && !ESkillisCasting && !isCasting)
+        {
+            StartCoroutine(CoroutineCastQSkill());
+        }
+        else if (ESkillOnCooldown)
+        {
+            Debug.Log("Spell on KD");
+        }
+        else if (!ESkillOnCooldown && Stats.Mana < ESkillManaCost)
+        {
+            Debug.Log("No mana");
+        }
+    }
 }

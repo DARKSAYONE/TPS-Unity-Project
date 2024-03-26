@@ -33,11 +33,11 @@ public class Fireball : MonoBehaviour
         transform.position += transform.forward * speed * Time.fixedDeltaTime;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.CompareTag("Mob"))
+        if(other.gameObject.CompareTag("Mob"))
         {
-            MobStatLogical mob = collision.gameObject.GetComponent<MobStatLogical>();
+            MobStatLogical mob = other.gameObject.GetComponent<MobStatLogical>();
             float Power = GameObject.FindWithTag("Player").GetComponent<PlayerStats>().PowerForce;
             if (mob.isAlive)
             {
