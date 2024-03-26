@@ -9,6 +9,7 @@ public class PlayerAudioScript : MonoBehaviour
     private AudioSource AS;
     [Header("Sounds")]
     [SerializeField] private AudioClip FireballCastSFX;
+    [SerializeField] private AudioClip GetDamagedSFX;
     void Start()
     {
         AS = GetComponent<AudioSource>();
@@ -23,6 +24,12 @@ public class PlayerAudioScript : MonoBehaviour
     public void AudioFireballCastingSound()
     {
         AS.clip = FireballCastSFX;
+        AS.Play();
+    }
+
+    public void GetDamaged()
+    {
+        AS.clip = GetDamagedSFX;
         AS.Play();
     }
 }

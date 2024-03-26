@@ -26,6 +26,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float JumpForce;
     [SerializeField] public float PowerForce;
     [SerializeField] public bool isAlive = true;
+    [Header("Other")]
+    [SerializeField] public PlayerAudioScript Audio;
     
 
     void Start()
@@ -36,6 +38,7 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Health -= damage;
+        Audio.GetDamaged();
     }
 
    

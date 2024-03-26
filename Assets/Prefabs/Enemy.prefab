@@ -1046,6 +1046,7 @@ MonoBehaviour:
   CastingIsStarted: 0
   TimeToCast: 5
   turnSpeed: 500
+  Effect: {fileID: 5459700718011262626}
 --- !u!195 &3353489926565469898
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3174,6 +3175,12 @@ MonoBehaviour:
 --- !u!4 &5375249684846229271 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3423388300971593625, guid: 48c5715f9603c3842a353516a8baefbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7285391114606606478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5459700718011262626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3377181292992421420, guid: 48c5715f9603c3842a353516a8baefbb,
     type: 3}
   m_PrefabInstance: {fileID: 7285391114606606478}
   m_PrefabAsset: {fileID: 0}

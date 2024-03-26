@@ -2536,6 +2536,7 @@ MonoBehaviour:
   JumpForce: 10
   PowerForce: 1
   isAlive: 1
+  Audio: {fileID: 666941360760279489}
 --- !u!114 &6313463647687135417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4127,6 +4128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FireballCastSFX: {fileID: 8300000, guid: 58b7f2a19ebde604ba4532392f471110, type: 3}
+  GetDamagedSFX: {fileID: 8300000, guid: b322dc39fc0ab9c40b27aa8042c3d05b, type: 3}
 --- !u!1 &5137736060566391607
 GameObject:
   m_ObjectHideFlags: 0
