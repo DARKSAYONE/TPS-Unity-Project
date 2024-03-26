@@ -40,13 +40,19 @@ public class EnemyLogic : MonoBehaviour
         {
             _DistanceToPlayer = Vector3.Distance(transform.position, Player.transform.position);
             CheckRange(_DistanceToPlayer);
+            TurnToPlayer();
         }
         else
         {
+            if(CastingIsStarted)
+            {
+                StopAllCoroutines();
+            }
+            Effect.SetActive(false);
             Stat.Death();
         }
 
-        TurnToPlayer();
+        
     }
 
     void CheckRange(float Distance)

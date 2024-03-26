@@ -84,14 +84,16 @@ public class Caster : MonoBehaviour
         {
             CastingEffect.SetActive(false);
         }
-
+        
+        GetTargetPoint();
     }
 
     Vector3 GetTargetPoint()
     {
         //ray to center of the screen
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.7f, 0));
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.6f, 0));
         RaycastHit hit;
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow);
         if (Physics.Raycast(ray, out hit))
         {
             return hit.point;
@@ -236,7 +238,7 @@ public class Caster : MonoBehaviour
     {
         if (!ESkillOnCooldown && Stats.Mana >= ESkillManaCost && !ESkillisCasting && !isCasting)
         {
-            StartCoroutine(CoroutineCastQSkill());
+            StartCoroutine(CoroutineCastESkill());
         }
         else if (ESkillOnCooldown)
         {
@@ -246,5 +248,34 @@ public class Caster : MonoBehaviour
         {
             Debug.Log("No mana");
         }
+    }
+
+    public IEnumerator CoroutineCastESkill()
+    {
+        isCasting = true;
+        Stats.Mana -= ESkillManaCost;
+        _Movement.CanMove = false;
+        ESkillisCasting = true;
+        yield return new WaitForSeconds(ESkillTimeToCast);
+        isCasting = false;
+        ESkillisCasting = false;
+        ESkillOnCooldown = true;
+        _Movement.CanMove = true;
+        UseESkill();
+        StartCoroutine(ESkillCooldownTimer());
+
+    }
+
+    public IEnumerator ESkillCooldownTimer()
+    {
+        yield return new WaitForSeconds (ESkillCooldownTime);
+        ESkillOnCooldown = false;
+    }
+
+    public void UseESkill()
+    {
+        Debug.Log("ECast");
+        Vector3 targetPoint = GetTargetPoint();
+        var _ESkill = Instantiate(ESkill, targetPoint, Quaternion.identity);
     }
 }

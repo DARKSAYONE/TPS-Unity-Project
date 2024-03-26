@@ -50,6 +50,7 @@ public class MobStatLogical : MonoBehaviour
         }
         EAI._Agent.isStopped = true;
         EAI._Animator._Anim.SetBool("Death", true);
+        //EAI._Animator._Anim.Play("")
         var rb = GetComponent<Rigidbody>();
         Destroy(rb);
         var colider = GetComponent<Collider>();
