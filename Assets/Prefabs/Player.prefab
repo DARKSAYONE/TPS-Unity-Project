@@ -2476,8 +2476,8 @@ GameObject:
   - component: {fileID: 9046166404018974512}
   - component: {fileID: 6313463647687135417}
   - component: {fileID: 7538147422790563112}
-  - component: {fileID: 6862857355036191009}
   - component: {fileID: 5224656224084268394}
+  - component: {fileID: 6862857355036191009}
   - component: {fileID: 4016198439392432644}
   m_Layer: 0
   m_Name: Player
@@ -2569,6 +2569,38 @@ MonoBehaviour:
   CanMove: 1
   isJump: 0
   _moveVector: {x: 0, y: 0, z: 0}
+--- !u!114 &5224656224084268394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3619747994037633569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad690c7630c96f243a8dcf72e82c9bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stats: {fileID: 0}
+  _Movement: {fileID: 0}
+  _AnimControl: {fileID: 0}
+  SourcePoint: {fileID: 4911516713847691067}
+  isCasting: 0
+  FSkill: {fileID: 5696274087145268059, guid: e17ac88b6fc092d4d9a10e9ab31dbd70, type: 3}
+  FSkillManaCost: 100
+  FSkillCooldownTime: 3
+  FSkillonCooldown: 0
+  FSkillisCasting: 0
+  FSkillTimeToCast: 3
+  FSkillAnimCompele: 0
+  PlayerGetQSkill: 1
+  QSkill: {fileID: 4829383825710745662, guid: ca5fd883008f3314faf07d6798b53f8c, type: 3}
+  QSkillManaCost: 150
+  QSkillCooldownTime: 3
+  QSkillOnCooldown: 0
+  QSkillisCasting: 0
+  QSkillAnimComplete: 0
+  QSkillTimeToCast: 1
 --- !u!143 &6862857355036191009
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2595,36 +2627,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.05, z: 0}
---- !u!114 &5224656224084268394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3619747994037633569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad690c7630c96f243a8dcf72e82c9bff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Stats: {fileID: 0}
-  _Movement: {fileID: 0}
-  _AnimControl: {fileID: 0}
-  SourcePoint: {fileID: 4911516713847691067}
-  isCasting: 0
-  FSkill: {fileID: 5696274087145268059, guid: e17ac88b6fc092d4d9a10e9ab31dbd70, type: 3}
-  FSkillManaCost: 100
-  FSkillCooldownTime: 3
-  FSkillonCooldown: 0
-  FSkillisCasting: 0
-  FSkillAnimCompele: 0
-  PlayerGetQSkill: 1
-  QSkill: {fileID: 4829383825710745662, guid: ca5fd883008f3314faf07d6798b53f8c, type: 3}
-  QSkillManaCost: 150
-  QSkillCooldownTime: 3
-  QSkillOnCooldown: 0
-  QSkillisCasting: 0
-  QSkillAnimComplete: 0
 --- !u!82 &4016198439392432644
 AudioSource:
   m_ObjectHideFlags: 0
