@@ -19,6 +19,7 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField] public bool CastingIsStarted = false;
     [SerializeField] public float TimeToCast = 5.0f;
     [SerializeField] private float turnSpeed = 500f;
+    [SerializeField] private GameObject Effect;
     void Start()
     {
         _Agent = GetComponent<NavMeshAgent>();
@@ -72,6 +73,7 @@ public class EnemyLogic : MonoBehaviour
     {
         Debug.Log("Couruntine started");
         CastingIsStarted = true;
+        Effect.SetActive(true);
         _Animator.Casting(true);
         yield return new WaitForSeconds(TimeToCast);
         Debug.Log("Couruntine over");
@@ -79,6 +81,7 @@ public class EnemyLogic : MonoBehaviour
         CastingIsStarted = false;
         _Agent.isStopped = false;
         _Animator.Casting(false);
+        Effect.SetActive(false);
     }
 
     void TurnToPlayer()

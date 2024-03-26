@@ -12,6 +12,8 @@ public class Caster : MonoBehaviour
     [SerializeField] public AnimationControl _AnimControl;
     [SerializeField] public Transform SourcePoint;
     [SerializeField] public bool isCasting = false;
+    [SerializeField] public PlayerAudioScript _Audio;
+    [SerializeField] public GameObject CastingEffect;
     [Header("First Skill")]
     [SerializeField] public GameObject FSkill;
     [SerializeField] public float FSkillManaCost;
@@ -73,6 +75,16 @@ public class Caster : MonoBehaviour
             }
             
         }
+
+        if(isCasting)
+        {
+            CastingEffect.SetActive(true);
+        }
+        else
+        {
+            CastingEffect.SetActive(false);
+        }
+
     }
 
     Vector3 GetTargetPoint()
@@ -133,6 +145,7 @@ public class Caster : MonoBehaviour
         FSkillisCasting = true;
         _Movement.CanMove = false;
         Stats.Mana -= FSkillManaCost;
+        _Audio.AudioFireballCastingSound();
         yield return new WaitForSeconds(FSkillTimeToCast);
         UseFSkill();
         FSkillisCasting = false;

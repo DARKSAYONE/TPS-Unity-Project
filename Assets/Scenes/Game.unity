@@ -249,6 +249,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2708568537759610865, guid: eeea0c05fddd6044482a4c0abea739c1,
+        type: 3}
+      propertyPath: Priority
+      value: 68
+      objectReference: {fileID: 0}
+    - target: {fileID: 2708568537759610865, guid: eeea0c05fddd6044482a4c0abea739c1,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2708568537759610865, guid: eeea0c05fddd6044482a4c0abea739c1,
+        type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: 0.39
+      objectReference: {fileID: 0}
     - target: {fileID: 3619747994037633569, guid: eeea0c05fddd6044482a4c0abea739c1,
         type: 3}
       propertyPath: m_Name
