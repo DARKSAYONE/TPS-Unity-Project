@@ -54,9 +54,7 @@ public class PlayerStats : MonoBehaviour
 
     public void ApplyMod()
     {
-        MaxHealth = MaxHealth * ModMaxHealth;
-        MoveSpeed = MoveSpeed * ModMoveSpeed;
-        MaxMana = MaxMana * ModMaxMana;
+        
     }
 
     public void ManaHeal()
@@ -74,8 +72,10 @@ public class PlayerStats : MonoBehaviour
             ApplyMod();
             Level++;
             EXP = 0;
-            PowerForce = PowerForce + (0.1f);
-            ModMaxHealth = ModMaxHealth + (0.2f);
+            PowerForce = PowerForce + (0.2f);
+            MaxHealth = MaxHealth + (Level * 5);
+            EXPForLevel = EXPForLevel + (Level * 70);
+            MaxMana = MaxMana + (Level * 10);
         }
     }
 

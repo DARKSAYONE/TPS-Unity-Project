@@ -2671,9 +2671,10 @@ MonoBehaviour:
   ModMoveSpeed: 1
   ModJumpForce: 1
   ModPowerForce: 1
+  ModMaxMana: 1
   Health: 1
   MaxHealth: 100
-  MaxMana: 1000
+  MaxMana: 150
   Mana: 0
   ManaRegen: 0.3
   Level: 1

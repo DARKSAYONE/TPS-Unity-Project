@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool BattleRoundComplete = false;
     [Header("ShopTime")]
     [SerializeField] public bool ShopTimeOn = false;
-    [SerializeField] public int MobsCount = 2;
+    [SerializeField] public int MobsCount = 1;
     [SerializeField] public List<GameObject> MobsInAction = new List<GameObject>();
 
     void Start()
@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void BattleRoundStarted(int Mobs)
     {
+        Debug.Log("BattleRoundStarted(MobsCount);");
         BattleRoundOn = true;
         RoundCounter++;
         foreach (var mob in Spawner)
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         }
         BattleRoundOn = false;
         BattleRoundProcess = true;
+        MobsCount += 1;
     }
 
     private bool CheckAllMobsDead()
@@ -80,7 +82,7 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(mob);
             }
-            MobsInAction.Clear();
+            
         }
 
     }
@@ -89,8 +91,30 @@ public class GameManager : MonoBehaviour
     {
         if(PortalToBattle.GetComponent<PortalScript>().isTeleported)
         {
-
+            ShoppingRoundOver();
+            PlayerInShop = false;
+            PortalToShop.GetComponent <PortalScript>().isTeleported = false;
         }
+        MobsInAction.Clear();
+    }
+
+    public void ShoppingRoundOver()
+    {
+        PortalToBattle.GetComponent<PortalScript>().isTeleported = false;
+        PlayerInShop = false;
+        BattleRoundProcess = false;
+        BattleRoundComplete = false;
+        Debug.Log("New round started");
+        allMobsDead = false;
+        //BattleRoundOn = true;
+        PortalToShop.SetActive(false);
+        Crutch();
+        RestorePlayer();
+    }
+
+    public void Crutch()
+    {
+        BattleRoundOn = false;
     }
 
     public void RestorePlayer()
