@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraControl : MonoBehaviour
@@ -9,6 +10,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] public Transform CamAxis;
     [SerializeField] public float MinAngle;
     [SerializeField] public float MaxAngle;
+    [SerializeField] public bool CanMove = true;
 
 
     void Start()
@@ -18,7 +20,8 @@ public class CameraControl : MonoBehaviour
 
     void Update()
     {
-        CameraRotation();
+        if(CanMove)
+            CameraRotation();
     }
 
     void CameraRotation()

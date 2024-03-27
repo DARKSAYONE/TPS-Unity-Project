@@ -2702,6 +2702,7 @@ MonoBehaviour:
   CamAxis: {fileID: 2625427056312010883}
   MinAngle: -30
   MaxAngle: 15
+  CanMove: 1
 --- !u!114 &7538147422790563112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2740,6 +2741,7 @@ MonoBehaviour:
   isCasting: 0
   _Audio: {fileID: 666941360760279489}
   CastingEffect: {fileID: 9054717595184414676}
+  CanCast: 1
   FSkill: {fileID: 5696274087145268059, guid: e17ac88b6fc092d4d9a10e9ab31dbd70, type: 3}
   FSkillManaCost: 100
   FSkillCooldownTime: 3
@@ -2747,6 +2749,7 @@ MonoBehaviour:
   FSkillisCasting: 0
   FSkillTimeToCast: 3
   FSkillAnimCompele: 0
+  FSkillDamageMod: 1
   PlayerGetQSkill: 1
   QSkill: {fileID: 4829383825710745662, guid: ca5fd883008f3314faf07d6798b53f8c, type: 3}
   QSkillManaCost: 150
@@ -2757,7 +2760,7 @@ MonoBehaviour:
   QSkillTimeToCast: 1
   PlayerGetESkill: 1
   ESkill: {fileID: 5687399387861329722, guid: 42a3a01402603bd4c8ab5bf997271772, type: 3}
-  ESkillManaCost: 300
+  ESkillManaCost: 100
   ESkillCooldownTime: 3
   ESkillOnCooldown: 0
   ESkillisCasting: 0
@@ -5917,7 +5920,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1339068111966311138}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9046166404018974512}
+        m_TargetAssemblyTypeName: PlayerStats, Assembly-CSharp
+        m_MethodName: GoToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7879123587826634848
 GameObject:
   m_ObjectHideFlags: 0

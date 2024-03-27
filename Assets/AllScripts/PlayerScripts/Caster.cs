@@ -14,6 +14,7 @@ public class Caster : MonoBehaviour
     [SerializeField] public bool isCasting = false;
     [SerializeField] public PlayerAudioScript _Audio;
     [SerializeField] public GameObject CastingEffect;
+    [SerializeField] public bool CanCast = true;
     [Header("First Skill")]
     [SerializeField] public GameObject FSkill;
     [SerializeField] public float FSkillManaCost;
@@ -22,6 +23,7 @@ public class Caster : MonoBehaviour
     [SerializeField] public bool FSkillisCasting = false;
     [SerializeField] public float FSkillTimeToCast = 5.0f;
     [SerializeField] public bool FSkillAnimCompele = false;
+    [SerializeField] public float FSkillDamageMod = 1.0f;
     [Header("Q Skill")]
     [SerializeField] public bool PlayerGetQSkill = true;
     [SerializeField] public GameObject QSkill;
@@ -59,19 +61,22 @@ public class Caster : MonoBehaviour
     {
         if (Stats.isAlive)
         {
+            if (CanCast)
+            {
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                CastFSkill();
-            }
-           
-            if (Input.GetKey(KeyCode.Q) && PlayerGetQSkill)
-            {
-                CastQSkill();
-            }
-            if(Input.GetKey(KeyCode.E) && PlayerGetESkill)
-            {
-                CastESkill();
+                if (Input.GetMouseButtonDown(0))
+                {
+                    CastFSkill();
+                }
+
+                if (Input.GetKey(KeyCode.Q) && PlayerGetQSkill)
+                {
+                    CastQSkill();
+                }
+                if (Input.GetKey(KeyCode.E) && PlayerGetESkill)
+                {
+                    CastESkill();
+                }
             }
             
         }
@@ -161,6 +166,7 @@ public class Caster : MonoBehaviour
         Debug.Log("CAST");
         var _FSkill = Instantiate(FSkill, SourcePoint.position, SourcePoint.rotation);
         _FSkill.transform.LookAt(GetTargetPoint());
+        _FSkill.gameObject.GetComponent<Fireball>().FireballBaseDamage = _FSkill.gameObject.GetComponent<Fireball>().FireballBaseDamage * FSkillDamageMod;
     }
 
     public IEnumerator FSkillCooldownTimer()
@@ -277,5 +283,6 @@ public class Caster : MonoBehaviour
         Debug.Log("ECast");
         Vector3 targetPoint = GetTargetPoint();
         var _ESkill = Instantiate(ESkill, targetPoint, Quaternion.identity);
+        
     }
 }

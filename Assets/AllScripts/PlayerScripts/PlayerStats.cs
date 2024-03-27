@@ -76,6 +76,7 @@ public class PlayerStats : MonoBehaviour
             MaxHealth = MaxHealth + (Level * 5);
             EXPForLevel = EXPForLevel + (Level * 70);
             MaxMana = MaxMana + (Level * 10);
+            BuyPoints++;
         }
     }
 
@@ -89,5 +90,10 @@ public class PlayerStats : MonoBehaviour
         int activeSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(activeSceneIndex);
         Time.timeScale = 1.0f;
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
