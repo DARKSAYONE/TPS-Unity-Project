@@ -72,9 +72,9 @@ public class PlayerStats : MonoBehaviour
             ApplyMod();
             Level++;
             EXP = 0;
-            PowerForce = PowerForce + (0.2f);
-            MaxHealth = MaxHealth + (Level * 5);
-            EXPForLevel = EXPForLevel + (Level * 70);
+            PowerForce = PowerForce + (0.4f);
+            MaxHealth = MaxHealth + (Level * 8);
+            EXPForLevel = EXPForLevel + (Level * 40);
             MaxMana = MaxMana + (Level * 10);
             BuyPoints++;
         }
