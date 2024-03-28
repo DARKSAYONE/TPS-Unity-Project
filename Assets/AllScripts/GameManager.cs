@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
     {
         if(PortalToBattle.GetComponent<PortalScript>().isTeleported)
         {
-            
+            ShoppingRoundOver();
             PlayerInShop = false;
             PortalToShop.GetComponent <PortalScript>().isTeleported = false;
            

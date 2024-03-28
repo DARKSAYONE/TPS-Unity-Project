@@ -23,6 +23,10 @@ public class Shop : MonoBehaviour
     [Header("QSkill")]
     [SerializeField] public int ESkillCost = 1;
     [SerializeField] public GameObject ESkillButton;
+    [Header("HealthUpgrade")]
+    [SerializeField] public int HealthUpgradeCost = 2;
+    [Header("ManaUpgrade")]
+    [SerializeField] public int ManaUpgradeCost = 1;
 
     void Start()
     {
@@ -112,6 +116,32 @@ public class Shop : MonoBehaviour
             ESkillButton.SetActive(false);
             PlayerCaster.PlayerGetESkill = true;
             PlayerStats.BuyPoints -= 1;
+        }
+        else
+        {
+            Debug.Log("Dont enough money");
+        }
+    }
+
+    public void BuyHealthUpgrade()
+    {
+        if (PlayerStats.BuyPoints >= HealthUpgradeCost)
+        {
+            PlayerStats.MaxHealth = PlayerStats.MaxHealth + 100;
+            PlayerStats.BuyPoints -= HealthUpgradeCost;
+        }
+        else
+        {
+            Debug.Log("Dont enough money");
+        }
+    }
+
+    public void BuyManaUpgrade()
+    {
+        if (PlayerStats.BuyPoints >= ManaUpgradeCost)
+        {
+            PlayerStats.MaxMana = PlayerStats.MaxMana + 100;
+            PlayerStats.BuyPoints -= ManaUpgradeCost;
         }
         else
         {
