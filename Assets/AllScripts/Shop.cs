@@ -13,6 +13,7 @@ public class Shop : MonoBehaviour
     [SerializeField] public Movement _Move;
     [SerializeField] public CameraControl _CameraControl;
     [SerializeField] public TextMeshProUGUI BuyPointsUI;
+    [SerializeField] private GameObject KeyUI;
     [Header("FireballUpgrade")]
     [SerializeField] public int FireballUpgradeCost = 1;
     [SerializeField] public GameObject FireballUpgradeButton;
@@ -37,7 +38,13 @@ public class Shop : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(Input.GetKeyDown(KeyCode.M))
+        
+        if(ShopOpen)
+            KeyUI.SetActive(false);
+        else if(!ShopOpen)
+            KeyUI.SetActive(true);
+
+        if (Input.GetKeyDown(KeyCode.M))
         {
             if(!ShopOpen)
             {
@@ -48,6 +55,7 @@ public class Shop : MonoBehaviour
                 PlayerCaster.CanCast = false;
                 _Move.CanMove = false;
                 _CameraControl.CanMove = false;
+                
 
             }
             else
@@ -61,6 +69,11 @@ public class Shop : MonoBehaviour
 
             }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        KeyUI.SetActive(false);
     }
 
     public void BuyUprgradeForFireball()
