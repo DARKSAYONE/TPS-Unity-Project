@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class SoundtrackManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private AudioSource Audio;
     void Start()
     {
-        
+        Audio = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    public void StopStartPlaying(bool State)
     {
-        
+        if(State)
+        {
+            Audio.Play();
+        }
+        else if(!State)
+        {
+            Audio.Stop();
+        }
     }
 }

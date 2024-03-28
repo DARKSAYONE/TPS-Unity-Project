@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject PortalToShop;
     [SerializeField] private GameObject PortalToBattle;
     [SerializeField] private bool PlayerInShop = false;
+    [SerializeField] private SoundtrackManager AudioManager;
     [Header("BattleRound")]
     [SerializeField] public bool BattleRoundOn = false;
     [SerializeField] public bool BattleRoundProcess = false;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool ShopTimeOn = false;
     [SerializeField] public int MobsCount = 1;
     [SerializeField] public List<GameObject> MobsInAction = new List<GameObject>();
+    
 
     void Start()
     {
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     public void BattleRoundStarted(int Mobs)
     {
+        
         Debug.Log("BattleRoundStarted(MobsCount);");
         BattleRoundOn = true;
         RoundCounter++;
@@ -52,6 +55,7 @@ public class GameManager : MonoBehaviour
         {
             mob.SpawnMobs(Mobs);
         }
+        AudioManager.StopStartPlaying(true);
         BattleRoundOn = false;
         BattleRoundProcess = true;
         MobsCount += 1;
@@ -67,8 +71,10 @@ public class GameManager : MonoBehaviour
         allMobsDead = CheckAllMobsDead();
         if (allMobsDead)
         {
+            AudioManager.StopStartPlaying(false);
             Debug.Log("Round Complete");
             BattleRoundComplete = true;
+            
         }
     }
 
