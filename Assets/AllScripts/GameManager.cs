@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject ShopUI;
     [SerializeField] private bool ShopUITimerStarted = false;
     [SerializeField] private bool RoundOverUITimerStarted = false;
+    [SerializeField] private TextMeshProUGUI RoundCountUI;
 
     void Start()
     {
@@ -44,8 +46,8 @@ public class GameManager : MonoBehaviour
 
         if (PlayerInShop)
             ShoppingTime();
-            
 
+        RoundCountUI.SetText("Round " + RoundCounter);
 
     }
 

@@ -6,11 +6,13 @@ public class BoomScript : MonoBehaviour
 {
     [SerializeField] public float MaxSize = 5;
     [SerializeField] public float Damage = 100;
+    [SerializeField] public float ModDamage;
 
     // Start is called before the first frame update
     void Start()
     {
         transform.localScale = Vector3.zero;
+        ModDamage = GameObject.FindWithTag("Player").GetComponent<PlayerStats>().PowerForce;
     }
 
     // Update is called once per frame
@@ -32,8 +34,8 @@ public class BoomScript : MonoBehaviour
             MobStatLogical mob = other.gameObject.GetComponent<MobStatLogical>();
             if (mob.isAlive)
             {
-                mob.TakeDamage(Damage);
-                Debug.Log("Mob hitted on " + Damage + " damage");
+                mob.TakeDamage(Damage * ModDamage);
+                Debug.Log("Mob hitted on " + Damage*ModDamage + " damage");
             }
         }
         

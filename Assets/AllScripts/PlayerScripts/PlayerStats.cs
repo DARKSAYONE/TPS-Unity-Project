@@ -18,7 +18,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float MaxHealth;
     [SerializeField] public float MaxMana;
     [SerializeField] public float Mana;
-    [SerializeField] public float ManaRegen = 0.001f;
+    [SerializeField] public float ManaRegen = 10.0f;
     [SerializeField] public int Level;
     [SerializeField] public float EXP;
     [SerializeField] public float EXPForLevel;
@@ -29,6 +29,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public bool isAlive = true;
     [Header("Other")]
     [SerializeField] public PlayerAudioScript Audio;
+    [SerializeField] private bool ManaTimerStart = false;
     
 
     void Start()
@@ -45,7 +46,8 @@ public class PlayerStats : MonoBehaviour
    
     void FixedUpdate()
     {
-        ManaHeal();
+        if (Mana < MaxMana && !ManaTimerStart)
+            StartCoroutine(ManaHeal());
         LevelUP();
         if (Health <= 0)
             isAlive = false;
@@ -57,12 +59,12 @@ public class PlayerStats : MonoBehaviour
         
     }
 
-    public void ManaHeal()
+    public IEnumerator ManaHeal()
     {
-        if(Mana < MaxMana)
-        {
-            Mana = Mana + ManaRegen;
-        }
+        ManaTimerStart = true;
+        yield return new WaitForSeconds(0.5f);
+        Mana = Mana + ManaRegen;
+        ManaTimerStart = false;
     }
 
     public void LevelUP()
@@ -74,7 +76,7 @@ public class PlayerStats : MonoBehaviour
             EXP = 0;
             PowerForce = PowerForce + (0.4f);
             MaxHealth = MaxHealth + (Level * 8);
-            EXPForLevel = EXPForLevel + (Level * 40);
+            EXPForLevel = EXPForLevel + (Level * 30);
             MaxMana = MaxMana + (Level * 10);
             BuyPoints++;
         }

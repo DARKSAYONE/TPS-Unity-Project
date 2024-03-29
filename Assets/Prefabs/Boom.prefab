@@ -122,7 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxSize: 10
-  Damage: 1000
+  Damage: 40
+  ModDamage: 0
 --- !u!54 &6409039110801735959
 Rigidbody:
   m_ObjectHideFlags: 0

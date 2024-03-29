@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 10
-  SpellBaseDamage: 30
+  SpellBaseDamage: 50
   Player: {fileID: 0}
   _PlayerStats: {fileID: 0}
   modDamage: 0
