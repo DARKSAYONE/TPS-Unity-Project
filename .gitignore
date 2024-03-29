@@ -74,3 +74,6 @@ TPS-Unity-Project/Temp/UnityTempFile-125f922fb07767f4e868ee8d86dc165c/package/Pr
 *.meta
 /TPS-Unity-Project/Library
 GMA01.zip
+*.zip
+/build0.2
+/build0.2.1

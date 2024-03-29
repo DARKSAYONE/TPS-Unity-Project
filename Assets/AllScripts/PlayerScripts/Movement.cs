@@ -30,8 +30,8 @@ public class Movement : MonoBehaviour
         Death();
 
         GetMoveInput();
-        if (Input.GetKey(KeyCode.Space) && CanMove && ChControl.isGrounded)
-            Jump();
+        /*if (Input.GetKey(KeyCode.Space) && CanMove && ChControl.isGrounded)
+            Jump();*/
 
         if (!ChControl.isGrounded)
             isJump = false;

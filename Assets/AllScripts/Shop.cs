@@ -13,6 +13,7 @@ public class Shop : MonoBehaviour
     [SerializeField] public Movement _Move;
     [SerializeField] public CameraControl _CameraControl;
     [SerializeField] public TextMeshProUGUI BuyPointsUI;
+    [SerializeField] private GameObject KeyUI;
     [Header("FireballUpgrade")]
     [SerializeField] public int FireballUpgradeCost = 1;
     [SerializeField] public GameObject FireballUpgradeButton;
@@ -22,6 +23,10 @@ public class Shop : MonoBehaviour
     [Header("QSkill")]
     [SerializeField] public int ESkillCost = 1;
     [SerializeField] public GameObject ESkillButton;
+    [Header("HealthUpgrade")]
+    [SerializeField] public int HealthUpgradeCost = 2;
+    [Header("ManaUpgrade")]
+    [SerializeField] public int ManaUpgradeCost = 1;
 
     void Start()
     {
@@ -37,7 +42,13 @@ public class Shop : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(Input.GetKeyDown(KeyCode.M))
+        
+        if(ShopOpen)
+            KeyUI.SetActive(false);
+        else if(!ShopOpen)
+            KeyUI.SetActive(true);
+
+        if (Input.GetKeyDown(KeyCode.M))
         {
             if(!ShopOpen)
             {
@@ -48,6 +59,7 @@ public class Shop : MonoBehaviour
                 PlayerCaster.CanCast = false;
                 _Move.CanMove = false;
                 _CameraControl.CanMove = false;
+                
 
             }
             else
@@ -61,6 +73,11 @@ public class Shop : MonoBehaviour
 
             }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        KeyUI.SetActive(false);
     }
 
     public void BuyUprgradeForFireball()
@@ -99,6 +116,32 @@ public class Shop : MonoBehaviour
             ESkillButton.SetActive(false);
             PlayerCaster.PlayerGetESkill = true;
             PlayerStats.BuyPoints -= 1;
+        }
+        else
+        {
+            Debug.Log("Dont enough money");
+        }
+    }
+
+    public void BuyHealthUpgrade()
+    {
+        if (PlayerStats.BuyPoints >= HealthUpgradeCost)
+        {
+            PlayerStats.MaxHealth = PlayerStats.MaxHealth + 100;
+            PlayerStats.BuyPoints -= HealthUpgradeCost;
+        }
+        else
+        {
+            Debug.Log("Dont enough money");
+        }
+    }
+
+    public void BuyManaUpgrade()
+    {
+        if (PlayerStats.BuyPoints >= ManaUpgradeCost)
+        {
+            PlayerStats.MaxMana = PlayerStats.MaxMana + 100;
+            PlayerStats.BuyPoints -= ManaUpgradeCost;
         }
         else
         {

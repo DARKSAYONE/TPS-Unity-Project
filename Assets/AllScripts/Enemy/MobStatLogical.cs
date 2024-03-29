@@ -15,8 +15,10 @@ public class MobStatLogical : MonoBehaviour
     [SerializeField] public float MoveSpeed;
     [SerializeField] public bool isAlive = true;
     [SerializeField] public bool GetEXP = false;
+    [SerializeField] public AudioSource GetDamageSFX;
     void Start()
     {
+        GetDamageSFX = GetComponent<AudioSource>();
         ApplyMod();
         Health = MaxHealth;
         EAI = GetComponent<EnemyLogic>();
@@ -34,6 +36,7 @@ public class MobStatLogical : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Health -= damage;
+        GetDamageSFX.Play();
         if(Health <= 0)
         {
             isAlive = false;

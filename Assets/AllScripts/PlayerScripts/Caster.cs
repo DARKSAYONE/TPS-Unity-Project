@@ -258,6 +258,8 @@ public class Caster : MonoBehaviour
 
     public IEnumerator CoroutineCastESkill()
     {
+        _AnimControl._Animator.SetBool("ESkillCast", true);
+        _AnimControl._Animator.Play("EnemyCasting", 0, 0);
         isCasting = true;
         Stats.Mana -= ESkillManaCost;
         _Movement.CanMove = false;
@@ -268,6 +270,7 @@ public class Caster : MonoBehaviour
         ESkillOnCooldown = true;
         _Movement.CanMove = true;
         UseESkill();
+        _AnimControl._Animator.SetBool("ESkillCast", false);
         StartCoroutine(ESkillCooldownTimer());
 
     }
