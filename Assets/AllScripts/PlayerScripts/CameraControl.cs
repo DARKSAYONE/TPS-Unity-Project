@@ -27,7 +27,7 @@ public class CameraControl : MonoBehaviour
     void CameraRotation()
     {
         transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y + Time.deltaTime * RotationSpeed * Input.GetAxis("Mouse X"),0);
-        var newAngleX = CamAxis.localEulerAngles.x - Time.deltaTime * RotationSpeed * Input.GetAxis("Mouse Y");
+        var newAngleX = CamAxis.localEulerAngles.x + Time.deltaTime * RotationSpeed * Input.GetAxis("Mouse Y");
         if (newAngleX > 180)
             newAngleX -= 360;
         newAngleX = Mathf.Clamp(newAngleX, MinAngle, MaxAngle);
