@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifeTime: 10
-  FireballBaseDamage: 30
+  FireballBaseDamage: 40
   Player: {fileID: 0}
   _PlayerStats: {fileID: 0}
   modDamage: 0

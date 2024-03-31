@@ -96,6 +96,7 @@ public class PlayerStats : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("MainMenu");
     }
 }
