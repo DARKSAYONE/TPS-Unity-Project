@@ -415,7 +415,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 21cb03d72473839488d30d2a53155f61, type: 3}
+  m_Texture: {fileID: 2800000, guid: b623f2b19641a5f4caded0b96bf3b49e, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1821,7 +1821,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0.2.1 GameJam ver
+  m_text: 0.2.2 GameJam ver
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject Player;
     [SerializeField] private List<MobSpawner> Spawner = new List<MobSpawner>();
-    [SerializeField] private int RoundCounter = 0;
+    [SerializeField] public int RoundCounter = 0;
     [SerializeField] private bool allMobsDead = false;
     [SerializeField] private GameObject PortalToShop;
     [SerializeField] private GameObject PortalToBattle;

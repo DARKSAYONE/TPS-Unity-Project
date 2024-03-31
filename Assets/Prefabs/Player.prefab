@@ -2838,7 +2838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce29148423cff5346b0fb9b394c907eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 500
+  RotationSpeed: 350
   CamAxis: {fileID: 2625427056312010883}
   MinAngle: -30
   MaxAngle: 15
@@ -5984,7 +5984,6 @@ GameObject:
   - component: {fileID: 1933700604772107154}
   - component: {fileID: 7492565415074733321}
   - component: {fileID: 43804005366900432}
-  - component: {fileID: 512274170422738551}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6110,18 +6109,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!114 &512274170422738551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7889980340520766150}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5365b66bfd56fc4580d0745f17a3026, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8035778309119693195
 GameObject:
   m_ObjectHideFlags: 0
